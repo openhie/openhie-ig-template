@@ -1,6 +1,7 @@
 ﻿{
   "package-id" : "opehhie.fhir.template",
   "title" : "Template for FHIR IGs published by OpenHIE",
+  "name" : "OpenHIE FHIR IG Template",
   "canonical" : "http://fhir.org/templates/openhie.fhir.template",
   "introduction" : "This is the template for FHIR guides published by OpenHIE",
   "list" : [
