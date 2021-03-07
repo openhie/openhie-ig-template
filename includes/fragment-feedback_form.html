@@ -1,0 +1,42 @@
+{% for feedbackEntry in site.data.features.feedback %}
+  {% if feedbackEntry.active %}
+    {% if feedbackEntry.type == 'googleform' %}
+      <script type="text/javascript">
+      /* <![CDATA[ */
+        $(':header[id]').each(function() {
+          var id = $(this).attr('id');
+          var feedbackurl = '{{feedbackEntry.formUrl}}';
+          var feedbacklabel = 'Feedback';
+          {% if feedbackEntry.parameters %}
+            {% if feedbackEntry.label %}
+              feedbacklabel = '{{feedbackEntry.label}}';
+            {% endif %};
+            {% for parm in feedbackEntry.parameters %}
+/* <![CDATA[ */
+              feedbackurl = feedbackurl + '&';
+              feedbackurl = feedbackurl + {{ parm.name }} + '=' + {{ parm.value }};
+/* ]]> */
+            {% endfor %}
+          {% endif %}
+
+          if (id) { //To make sure the element has an id
+            $(this).append(function () {
+              return $('<a/>', {
+                id,
+                href: feedbackurl,
+                text: feedbacklabel+' ' ,
+                class: 'feedback',
+                target: '_blank',
+                onclick: 'window.open('+feedbackurl+',\'newwindow\',\'width=300,height=250\');return false;'
+        
+              });
+            });
+          }
+        })
+      /* ]]> */
+      </script>  
+    {% endif %}
+  {% endif %}
+
+
+{% endfor %}
