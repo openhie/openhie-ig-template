@@ -352,18 +352,18 @@
 .ui-widget-content a {
 	color: #222
 }
-
+/*
 .ui-widget-header {
 	border: 1px solid #4297d7;
 	background: #5c9ccc url(images/ui-bg_gloss-wave_55_5c9ccc_500x100_c56ba853727c57c51ab90b9e27f7f2d3.png) 50% 50% repeat-x;
 	color: #fff;
 	font-weight: 700
 }
-
+*/
 .ui-widget-header a {
 	color: #fff
 }
-
+/*
 .ui-button,
 .ui-state-default,
 .ui-widget-content .ui-state-default,
@@ -375,7 +375,7 @@ html .ui-button.ui-state-disabled:hover {
 	font-weight: 700;
 	color: #2e6e9e
 }
-
+*/
 .ui-button,
 .ui-state-default a,
 .ui-state-default a:link,
