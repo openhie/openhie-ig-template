@@ -37,8 +37,10 @@
           fhirQ.contained.forEach(function (contained, i) {
             if (contained.resourceType == 'ValueSet'){
               vset = contained;
-              contained = exps.entry.find(e => e.resource.id === vset.id).resource;
-              fhirQ.contained[i] = contained
+              if (exps.entry.some(e => e.resource.id === vset.id)){
+                contained = exps.entry.find(e => e.resource.id === vset.id).resource;
+                fhirQ.contained[i] = contained
+              }
             }
           });
         }  
