@@ -16,9 +16,28 @@
 <div id=formContainer></div>
 <br> </br>
 
-    <button onclick="showQR()">
-    Show QuestionnaireResponse
-    </button>
+    <div class="bs-example">
+      <!-- Button HTML (to Trigger Modal) -->
+      <button type="button" class="btn btn-lg btn-primary" onclick="showQR()">Show QuestionnaireResponse</button>
+      <!-- Modal HTML -->
+      <div id="myModal" class="modal fade" tabindex="-1">
+          <div class="modal-dialog" style="position: unset; width:70%";>
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <div class="modal-title">QuestionnaireResponse  
+                        <button title="" class="btn-copy" data-clipboard-target="#qrjson" data-original-title="Click to copy QR as JSON">
+                        </button>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button></div>
+                  </div>
+                  <textarea style="margin: 2%; width:96%; min-width:96%; max-width:96%; min-height:350px;" id="qrjson" class="modal-body copy-text">
+                  </textarea>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
     <br> </br>
     
     <script src="{{site.data.info.assets}}assets/js/lforms.min.js"></script>
@@ -100,17 +119,17 @@
 
         // Add the form to the page
         LForms.Util.addFormToPage(fhirQ, 'formContainer');
-        
-        // Define the function for showing the QuestionnaireResponse
-        function showQR() {
-          var qr = LForms.Util.getFormFHIRData('QuestionnaireResponse', 'R4');
-          window.alert(JSON.stringify(qr, null, 2));
-        }
     
       }).fail(function(){
             console.log("An error has occurred.");
       });
 
+      function showQR() {
+          var qr = LForms.Util.getFormFHIRData('QuestionnaireResponse', 'R4');
+          console.log(JSON.stringify(qr, null, 2))
+          $("#qrjson").text(JSON.stringify(qr, null, 2));
+          $("#myModal").modal('show');
+        }      
     </script>
     
 
