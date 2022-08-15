@@ -95,19 +95,31 @@
       </and>
     </condition>
   </target>
-  <target name="onGenerate.plantUml.ig" depends="check-plantumlfiles" if="ig.plantumlfiles.exist">
+  <target name="onGenerate.plantUml.png.ig" depends="check-plantumlfiles" if="ig.plantumlfiles.exist">
     <java jar="${ig.scripts}/plantuml.jar" fork="true" failonerror="true">
       <jvmarg line="-Dfile.encoding=UTF-8"/>
-      <arg line="-nometadata -tpng -o &quot;${ig.temp}&quot; &quot;${basedir}/${folder.input}/images-source/*.plantuml&quot;"/>
+      <arg line="-nometadata -tpng -o &quot;${basedir}/${folder.input}/images/&quot; &quot;${basedir}/${folder.input}/images-source/*.plantuml&quot;"/>
     </java>
   </target>
-  <target name="onGenerate.plantUml.template" depends="check-plantumlfiles" if="template.plantumlfiles.exist">
+  <target name="onGenerate.plantUml.png.template" depends="check-plantumlfiles" if="template.plantumlfiles.exist">
     <java jar="${ig.scripts}/plantuml.jar" fork="true" failonerror="true">
       <jvmarg line="-Dfile.encoding=UTF-8"/>
-      <arg line="-nometadata -tpng -o &quot;${ig.temp}&quot; &quot;${ig.template}/images-source/*.plantuml&quot;"/>
+      <arg line="-nometadata -tpng -o &quot;${basedir}/${folder.input}/images/&quot; &quot;${ig.template}/images-source/*.plantuml&quot;"/>
     </java>
   </target>
-  <target name="onGenerate.plantUml" depends="onGenerate.plantUml.ig,onGenerate.plantUml.template"/>
+  <target name="onGenerate.plantUml.svg.ig" depends="check-plantumlfiles" if="ig.plantumlfiles.exist">
+    <java jar="${ig.scripts}/plantuml.jar" fork="true" failonerror="true">
+      <jvmarg line="-Dfile.encoding=UTF-8"/>
+      <arg line="-nometadata -tsvg -o &quot;${basedir}/${dir.temp.includes}&quot; &quot;${basedir}/${folder.input}/images-source/*.plantuml&quot;"/>
+    </java>
+  </target>
+  <target name="onGenerate.plantUml.svg.template" depends="check-plantumlfiles" if="template.plantumlfiles.exist">
+    <java jar="${ig.scripts}/plantuml.jar" fork="true" failonerror="true">
+      <jvmarg line="-Dfile.encoding=UTF-8"/>
+      <arg line="-nometadata -tsvg -o &quot;${basedir}/${dir.temp.includes}&quot; &quot;${ig.template}/images-source/*.plantuml&quot;"/>
+    </java>
+  </target>
+  <target name="onGenerate.plantUml" depends="onGenerate.plantUml.svg.ig,onGenerate.plantUml.svg.template,onGenerate.plantUml.png.ig,onGenerate.plantUml.png.template"/>
   <target name="onGenerate.infoFile" depends="onGenerate.setup">
     <xslt in="${onGenerate.ig.source}xml" out="${ig.temp}/_data/info.json" style="${ig.scripts}/onGenerate.genJson.xslt"/>
   </target>
