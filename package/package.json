@@ -8,6 +8,6 @@
   "canonical": "http://github.com/openhie/openhie-ig-template",
 	"base":  "fhir.base.template",
   "dependencies": {
-    "fhir.base.template": "current"
+    "fhir.base.template": "0.2.2"
   }
 }
