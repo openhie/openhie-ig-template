@@ -40,9 +40,17 @@
       </div>
     <br> </br>
     
-    <script src="{{site.data.info.assets}}assets/js/lforms.min.js"></script>
-    <script src="{{site.data.info.assets}}assets/js/lformsFHIR.min.js"></script>
+    <!-- <script src="{{site.data.info.assets}}assets/js/lforms.min.js"></script>
+    <script src="{{site.data.info.assets}}assets/js/lformsFHIR.min.js"></script> -->
+
     
+    <script src="./content/assets/js/zone.min.js"></script>
+    <script src="./content/assets/js/runtime.js"></script>
+    <script src="./content/assets/js/polyfills.js"></script>
+    <script src="./content/assets/js/scripts.js"></script>
+    <script src="./content/assets/js/main.js"></script>
+    <script src="./content/assets/js/lformsFHIRAll.min.js"></script>
+
  
     <script>
   
@@ -84,31 +92,41 @@
 
           // Add the form to the page
           LForms.Util.addFormToPage(fhirQ, 'formContainer');
-      }).fail(function(){
-          console.log("An error has occurred.");
-      });
+            }).fail(function(){
+                console.log("An error has occurred.");
+            });
 
-      // Function to list ValueSets
-      function listValueSets(obj, found = []) {
-          if(obj.hasOwnProperty('answerValueSet')) {
-              let url = obj['answerValueSet'];
-              found.push(url);
-          }
-          if(obj.hasOwnProperty('item')) {
-              obj['item'].forEach(function(item) {
-                  listValueSets(item, found);
-              });
-          }
-          return found;
-      }
-      // Function to show QR code
-      function showQR() {
-          var qr = LForms.Util.getFormFHIRData('QuestionnaireResponse', 'R4');
-          console.log(JSON.stringify(qr, null, 2))
-          $("#qrjson").text(JSON.stringify(qr, null, 2));
-          $("#myModal").modal('show');
-      }  
+            // Function to list ValueSets
+            function listValueSets(obj, found = []) {
+                if(obj.hasOwnProperty('answerValueSet')) {
+                    let url = obj['answerValueSet'];
+                    found.push(url);
+                }
+                if(obj.hasOwnProperty('item')) {
+                    obj['item'].forEach(function(item) {
+                        listValueSets(item, found);
+                    });
+                }
+                return found;
+            }
+
+            // Function to show QR code
+            function showQR() {
+                var qr = LForms.Util.getFormFHIRData('QuestionnaireResponse', 'R4');
+                console.log(JSON.stringify(qr, null, 2))
+                $("#qrjson").text(JSON.stringify(qr, null, 2));
+                $("#myModal").modal('show');
+            }  
+
+
+
+
+
+
+
+
     </script>
+    
 
 
 
